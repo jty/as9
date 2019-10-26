@@ -1,3 +1,8 @@
+#ifndef PSEUDO_H
+# define PSEUDO_H
+
+#include "asdef.h"
+
 #define RMB     0       /* Reserve Memory Bytes         */
 #define FCB     1       /* Form Constant Bytes          */
 #define FDB     2       /* Form Double Bytes (words)    */
@@ -14,3 +19,4 @@ extern struct oper pseudo[];
 
 void do_pseudo(int op); /* which op */
 
+#endif

@@ -5,3 +5,4 @@ as9.exe
 as9.dSYM
 *.o
 *.obj
+*.pro.user*

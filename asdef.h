@@ -1,6 +1,9 @@
 /*
  *      machine independent definitions and global variables
  */
+#ifndef ASDEF_H
+# define ASDEF_H 1
+#include <stdio.h>
 
 typedef int bool;
 
@@ -106,23 +109,23 @@ extern int     N_page ;             /* new page flag */
 extern int     Page_num ;           /* page number */
 
 struct link { /* linked list to hold line numbers */
-       int L_num; /* line number */
-       struct link *next; /* pointer to next node */
+    int L_num; /* line number */
+    struct link *next; /* pointer to next node */
 };
 
 struct nlist { /* basic symbol table entry */
-        char    *name;
-        int     def;
-        struct nlist *Lnext ; /* left node of the tree leaf */
-        struct nlist *Rnext; /* right node of the tree leaf */
-        struct link *L_list; /* pointer to linked list of line numbers */
+    char    *name;
+    int     def;
+    struct nlist *Lnext ; /* left node of the tree leaf */
+    struct nlist *Rnext; /* right node of the tree leaf */
+    struct link *L_list; /* pointer to linked list of line numbers */
 };
 
 struct oper {   /* an entry in the mnemonic table */
-        char    *mnemonic;      /* its name */
-        char    class;          /* its class */
-        int     opcode;         /* its base opcode */
-        char    cycles;         /* its base # of cycles */
+    char    *mnemonic;      /* its name */
+    char    class;          /* its class */
+    int     opcode;         /* its base opcode */
+    char    cycles;         /* its base # of cycles */
 };
 
 extern struct  nlist *root;            /* root node of the tree */
@@ -138,3 +141,4 @@ extern char    Bin_name[MAXPATH];
 extern char    Lst_name[MAXPATH];
 extern char    Sym_name[MAXPATH];
 extern char    Crf_name[MAXPATH];
+#endif

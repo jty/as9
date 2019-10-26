@@ -14,15 +14,15 @@ char	Fwd_name[] = { "Fwd_refs" } ;
  */
 void fwdinit()
 {
-	Forward = creat(Fwd_name,FILEMODE);
-	if(Forward <0)
-		fatal("Can't create temp file");
-	close(Forward); /* close and reopen for reads and writes */
-	Forward = open(Fwd_name,UPDATE);
-	if(Forward <0)
-		fatal("Forward ref file has gone.");
+    Forward = creat(Fwd_name,FILEMODE);
+    if(Forward <0)
+        fatal("Can't create temp file");
+    close(Forward); /* close and reopen for reads and writes */
+    Forward = open(Fwd_name,UPDATE);
+    if(Forward <0)
+        fatal("Forward ref file has gone.");
 #ifndef DEBUG
-	unlink(Fwd_name);
+    unlink(Fwd_name);
 #endif
 }
 
@@ -31,13 +31,13 @@ void fwdinit()
  */
 void fwdreinit()
 {
-	F_ref   = 0;
-	Ffn     = 0;
-	lseek(Forward,0L,ABS);   /* rewind forward refs */
-	read(Forward,&Ffn,sizeof(Ffn));
-	read(Forward,&F_ref,sizeof(F_ref)); /* read first forward ref into mem */
+    F_ref   = 0;
+    Ffn     = 0;
+    lseek(Forward,0L,ABS);   /* rewind forward refs */
+    read(Forward,&Ffn,sizeof(Ffn));
+    read(Forward,&F_ref,sizeof(F_ref)); /* read first forward ref into mem */
 #ifdef DEBUG
-	printf("First fwd ref: %d,%d\n",Ffn,F_ref);
+    printf("First fwd ref: %d,%d\n",Ffn,F_ref);
 #endif
 }
 
@@ -46,8 +46,8 @@ void fwdreinit()
  */
 void fwdmark()
 {
-	write(Forward,&Cfn,sizeof(Cfn));
-	write(Forward,&Line_num,sizeof(Line_num));
+    write(Forward,&Cfn,sizeof(Cfn));
+    write(Forward,&Line_num,sizeof(Line_num));
 }
 
 /*
@@ -55,20 +55,20 @@ void fwdmark()
  */
 void fwdnext()
 {
-	int stat;
+    int stat;
 
-	stat = read(Forward,&Ffn,sizeof(Ffn));
+    stat = read(Forward,&Ffn,sizeof(Ffn));
 #ifdef DEBUG
-	printf("Ffn stat=%d ",stat);
+    printf("Ffn stat=%d ",stat);
 #endif
-	stat = read(Forward,&F_ref,sizeof(F_ref));
+    stat = read(Forward,&F_ref,sizeof(F_ref));
 #ifdef DEBUG
-	printf("F_ref stat=%d  ",stat);
+    printf("F_ref stat=%d  ",stat);
 #endif
-	if( stat < 2 ){
-		F_ref=0;Ffn=0;
-		}
+    if( stat < 2 ){
+        F_ref=0;Ffn=0;
+    }
 #ifdef DEBUG
-	printf("Next Fwd ref: %d,%d\n",Ffn,F_ref);
+    printf("Next Fwd ref: %d,%d\n",Ffn,F_ref);
 #endif
 }

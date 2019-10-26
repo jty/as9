@@ -1,4 +1,4 @@
-void fwdinit();
-void fwdreinit();
-void fwdmark();
-void fwdnext();
+void fwdinit(void);
+void fwdreinit(void);
+void fwdmark(void);
+void fwdnext(void);
