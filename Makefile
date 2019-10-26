@@ -6,7 +6,6 @@ table9.h \
 #
 
 SRCC=   \
-as9.c   \
 as.c    \
 do9.c   \
 eval.c  \
@@ -15,12 +14,15 @@ output.c        \
 pseudo.c        \
 symtab.c        \
 util.c          \
+asdef.c
 #
 
 # This is peculiar, as9 only includes other files.
 # The main program sits in as.c
-as9 : $(SRCC) $(SRCH) ; gcc -g $< -o $@
-#as9 : $(SRCC) $(SRCH) ; gcc -g -DDEBUG $< -o $@
+as9 : $(SRCC) $(SRCH)
+	$(CC) $(CFLAGS)  $(SRCC) -o $@
+
+#as9 : $(SRCC) $(SRCH) ; $(CC) $(CFLAGS) -g -DDEBUG $< -o $@
 
 as9.tgz : $(SRCC) $(SRCH) as9 changes.doc Makefile; tar cfz $@ $^
 

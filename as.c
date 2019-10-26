@@ -1,5 +1,4 @@
-char mapdn();
-char *alloc();
+#include "decl.h"
 /*
  *      as ---  cross assembler main program
  *      This requries a very peculiar set of arguments:
@@ -7,7 +6,7 @@ char *alloc();
  *      Then comes the first option, with a dash
  *      Then come the, possibly multichar, options without dash.
  */
-main(argc,argv)
+int main(argc,argv)
 int     argc;
 char    **argv;
 {
@@ -98,7 +97,7 @@ char    **argv;
         exit(Err_count);
 }
 
-initialize()
+void initialize()
 {
         FILE    *fopen();
         int     i = 0;
@@ -141,7 +140,7 @@ initialize()
         localinit();    /* target machine specific init. */
 }
 
-re_init()
+void re_init()
 {
 #ifdef DEBUG
         printf("Reinitializing\n");
@@ -154,7 +153,7 @@ re_init()
         fwdreinit();
 }
 
-open_files()
+void open_files()
 {
         if(Oflag){
           strcat(Obj_name,".s19");  /* append .s19 to object file name. */
@@ -187,7 +186,7 @@ open_files()
         }
 }
 
-make_pass()
+void make_pass()
 {
         char *pc;
 #ifdef DEBUG
@@ -213,7 +212,7 @@ make_pass()
 /*
  *      parse_line --- split input line into label, op and operand
  */
-parse_line()
+int parse_line()
 {
         register char *pcfrm = Line;
         register char *pcto;
@@ -257,7 +256,7 @@ parse_line()
 /*
  *      process --- determine mnemonic class and act on it
  */
-process()
+void process()
 {
         register struct oper *i;
         struct oper *mne_look();

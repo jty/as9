@@ -1,9 +1,14 @@
+#include "decl.h"
+/* These two are really not headers but definitions */
+#include "table9.h"
+#include "pseudo9.h"
+
 /*
  *      install --- add a symbol to the table
  */
-install(str,val)
-char    *str;
-int     val;
+int install(
+	    char    *str,
+	    int     val)
 {
         struct link *lp;
         struct nlist *np,*p,*backp;
@@ -70,8 +75,8 @@ int     val;
  *      lookup --- find string in symbol table
  */
 struct nlist *
-lookup(name)
-char    *name;
+lookup(
+       char    *name)
 {
         struct nlist *np;
         int     i;
@@ -105,8 +110,8 @@ char    *name;
  *      Searches both the machine mnemonic table and the pseudo table.
  */
 struct oper *
-mne_look(str)
-char    *str;
+mne_look(
+	 char    *str)
 {
         struct oper *low,*high,*mid;
         int     cond;

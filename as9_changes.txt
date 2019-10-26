@@ -67,3 +67,8 @@ BASIC and assembler programmers. Don't blame me for ``int Oflag'' in
 header files, global variables hidden in unexpected places, prototypes
 within function bodies, no output to stderr, non-idiomatic variable
 names, idiosyncratic option specification etc.
+
+
+Nov 2019 Jyrki Yli-Nokari
+Rearrangement of source code and make files and contemporary C-style function declarations and definitions.
+Compiles on Mac OSX without warnings using make CFLAGS-std=c89

@@ -1,3 +1,4 @@
+#include "decl.h"
 /*
  *      MC6809 specific processing
  */
@@ -34,7 +35,7 @@ int     rcycl[]= { 2,2, 2, 2, 2, 2,  0,0,1,1,1,1,0};
 /*
  *      localinit --- machine specific initialization
  */
-localinit()
+void localinit()
 {
 }
 
@@ -44,9 +45,9 @@ localinit()
  *      Called with the base opcode and it's class. Optr points to
  *      the beginning of the operand field.
  */
-do_op(opcode,class)
-int opcode;     /* base opcode */
-int class;      /* mnemonic class */
+void do_op(
+	   int opcode,     /* base opcode */
+	   int class)      /* mnemonic class */
 {
         int     dist;   /* relative branch distance */
         int     src,dst;/* source and destination registers */
@@ -284,9 +285,9 @@ int class;      /* mnemonic class */
 /*
  *      do_gen --- process general addressing mode stuff
  */
-do_gen(op,mode)
-int     op;
-int     mode;
+void do_gen(
+	    int     op,
+	    int     mode)
 {
         if( mode == IMMED){
                 Optr++;
@@ -349,8 +350,8 @@ int     mode;
 /*
  *      do_indexed --- handle all wierd stuff for indexed addressing
  */
-do_indexed(op)
-int op;
+void do_indexed(
+		int op)
 {
         int     pbyte;
         int     j,k;
@@ -522,8 +523,8 @@ int op;
  *      abd_index --- a,b or d indexed
  */
 
-abd_index(pbyte)
-int pbyte;
+void abd_index(
+	       int pbyte)
 {
         int     k;
 
@@ -537,8 +538,8 @@ int pbyte;
 /*
  *      rtype --- return register type in post-byte format
  */
-rtype(r)
-int r;
+int rtype(
+      int r)
 {
         switch(r){
         case RX:        return(0x00);
@@ -553,7 +554,7 @@ int r;
 /*
  *      set_mode --- determine addressing mode from operand field
  */
-set_mode()
+int set_mode()
 {
         register char *p;
 
@@ -573,7 +574,7 @@ set_mode()
 /*
  *      regnum --- return register number of *Optr
  */
-regnum()
+int regnum()
 {
         if( head(Optr,"D" ))return(RD);
         if( head(Optr,"X" ))return(RX);

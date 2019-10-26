@@ -1,8 +1,9 @@
+#include "decl.h"
 /*
  *      fatal --- fatal error handler
  */
-fatal(str)
-char    *str;
+void fatal(
+	   char    *str)
 {
         printf("%s\n",str);
         exit(-1);
@@ -12,8 +13,8 @@ char    *str;
  *      error --- error in a line
  *                      print line number and error
  */
-error(str)
-char    *str;
+void error(
+	   char    *str)
 {
         if(N_files > 1)
                 printf("%s,",Argv[Cfn]);
@@ -25,7 +26,7 @@ char    *str;
  *      errors --- error in a line
  *                      print line number and error and string
  */
-errors(char *msg, char *str)
+void errors(char *msg, char *str)
 {
         if(N_files > 1)
                 printf("%s,",Argv[Cfn]);
@@ -37,8 +38,8 @@ errors(char *msg, char *str)
  *      warn --- trivial error in a line
  *                      print line number and error
  */
-warn(str)
-char    *str;
+void warn(
+	  char    *str)
 {
         if(N_files > 1)
                 printf("%s,",Argv[Cfn]);
@@ -53,8 +54,8 @@ char    *str;
  *      as valid label characters.
  *      Blank and the comment sign are delimiters.
  */
-delim(c)
-char    c;
+int delim(
+	  char    c)
 {
         if( any(c," :;\t\n") || EOS==c )
                 return(YES);
@@ -64,8 +65,8 @@ char    c;
 /*
  *      skip_white --- move pointer to next non-whitespace char
  */
-char *skip_white(ptr)
-char    *ptr;
+char *skip_white(
+		 char    *ptr)
 {
         while( any(*ptr," \n\t\r") )
                 ptr++;
@@ -75,8 +76,8 @@ char    *ptr;
 /*
  *      eword --- emit a word to code file
  */
-eword(wd)
-int     wd;
+void eword(
+	   int     wd)
 {
         emit(hibyte(wd));
         emit(lobyte(wd));
@@ -85,14 +86,14 @@ int     wd;
 /*
  *      emit --- emit a byte to code file
  */
-emit(byte)
+void emit(int byte)
 {
 #ifdef DEBUG
         printf("%2x @ %4x\n",byte,Pc);
 #endif
         if(Pass==1){
                 Pc++;
-                return(YES);
+                return;
                 }
         if(P_total < P_LIMIT)
                 P_bytes[P_total++] = byte;
@@ -105,7 +106,7 @@ emit(byte)
 /*
  *      f_record --- flush record out to S19 and Bin files if neccesary
  */
-f_record()
+void f_record()
 {
         int     i;
         int     chksum;
@@ -147,8 +148,8 @@ f_record()
 
 char    *hexstr = { "0123456789ABCDEF" } ;
 
-hexout(byte)
-int     byte;
+void hexout(
+	    int     byte)
 {
         char hi,lo;
 
@@ -156,8 +157,8 @@ int     byte;
         fprintf(Objfil,"%c%c",hexstr[byte>>4],hexstr[byte&017]);
 }
 
-binout(byte)
-int     byte;
+void binout(
+	    int     byte)
 {
         fprintf(Binfil,"%c",byte);
 }
@@ -165,7 +166,7 @@ int     byte;
 /*
  *      print_line --- pretty print input line to List file
  */
-print_line()
+void print_line()
 {
         int     i;
 
@@ -204,9 +205,9 @@ print_line()
 /*
  *      any --- does str contain c?
  */
-any(c,str)
-char    c;
-char    *str;
+int any(
+	char    c,
+	char    *str)
 {
         while(*str != EOS)
                 if(*str++ == c)
@@ -217,8 +218,8 @@ char    *str;
 /*
  *      mapdn --- convert A-Z to a-z
  */
-char mapdn(c)
-char c;
+char mapdn(
+	   char c)	
 {
         if( c >= 'A' && c <= 'Z')
                 return(c+040);
@@ -228,16 +229,16 @@ char c;
 /*
  *      lobyte --- return low byte of an int
  */
-lobyte(i)
-int i;
+int lobyte(
+	   int i)
 {
         return(i&0xFF);
 }
 /*
  *      hibyte --- return high byte of an int
  */
-hibyte(i)
-int i;
+int hibyte(
+	   int i)
 {
         return((i>>8)&0xFF);
 }
@@ -255,8 +256,8 @@ int head( char *str1, char *str2 )
 /*
  *      alpha --- is character a legal letter
  */
-alpha(c)
-char c;
+int alpha(
+	  char c)
 {
         if( c<= 'z' && c>= 'a' )return(YES);
         if( c<= 'Z' && c>= 'A' )return(YES);
@@ -267,8 +268,8 @@ char c;
 /*
  *      alphan --- is character a legal letter or digit
  */
-alphan(c)
-char c;
+int alphan(
+	   char c)
 {
         if( alpha(c) )return(YES);
         if( c<= '9' && c>= '0' )return(YES);
@@ -279,8 +280,8 @@ char c;
 /*
  *      white --- is character whitespace?
  */
-white(c)
-char c;
+int white(
+	  char c)
 {
         return any(c," \n\t\r")? YES: NO ;
 }
@@ -289,10 +290,8 @@ char c;
  *      alloc --- allocate memory
  */
 char *
-alloc(nbytes)
-int nbytes;
+alloc(
+      int nbytes)
 {
-        char *malloc();
-
         return(malloc(nbytes));
 }
