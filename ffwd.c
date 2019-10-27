@@ -1,4 +1,8 @@
-#include "decl.h"
+#include "ffwd.h"
+#include <fcntl.h>
+#include "util.h"
+#include "asdef.h"
+
 /*
  *      file I/O version of forward ref handler
  */
@@ -6,8 +10,8 @@
 #define	UPDATE		2	/* file open mode */
 #define	ABS		0	/* absolute seek */
 
-int	Forward =0;		/* temp file's file descriptor	*/
-char	Fwd_name[] = { "Fwd_refs" } ;
+static int	Forward =0;		/* temp file's file descriptor	*/
+static char	Fwd_name[] = { "Fwd_refs" } ;
 
 /*
  *      fwdinit --- initialize forward ref file

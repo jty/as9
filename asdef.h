@@ -2,7 +2,8 @@
  *      machine independent definitions and global variables
  */
 #ifndef ASDEF_H
-# define ASDEF_H 1
+# define ASDEF_H
+
 #include <stdio.h>
 
 typedef int bool;

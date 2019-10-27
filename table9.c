@@ -1,4 +1,3 @@
-#include "asdef.h"
 struct oper table[] = {
 /*
   MNE     CLASS   BASE    CYCLES */

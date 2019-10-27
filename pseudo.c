@@ -1,4 +1,8 @@
-#include "decl.h"
+#include "pseudo.h"
+#include "eval.h"
+#include "asdef.h"
+#include "util.h"
+#include "symtab.h"
 /*
  *      do_pseudo --- do pseudo op processing
  */
@@ -9,7 +13,7 @@ void do_pseudo(
     int     j;
     int     fill;
 
-    if( op != EQU && *Label )
+    if( (op != EQU && op != SET) && *Label )
         install(Label,Pc);
 
     P_force++;
@@ -81,13 +85,18 @@ void do_pseudo(
         else
             error("Undefined Operand during Pass One");
         break;
+    case SET:
     case EQU:                       /* equate */
         if(*Label==EOS){
-            error("EQU requires label");
+            error(op == EQU ? "EQU requires label" : "SET requires label");
             break;
         }
         if( eval() ){
-            install(Label,Result);
+            if (op == EQU) {
+                install(Label,Result);
+            } else {
+                update(Label,Result);
+            }
             Old_pc = Result;        /* override normal */
         }
         else

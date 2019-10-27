@@ -1,4 +1,8 @@
-#include "decl.h"
+#include "util.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "asdef.h"
 /*
  *      fatal --- fatal error handler
  */
@@ -289,7 +293,7 @@ int white(
 /*
  *      alloc --- allocate memory
  */
-char *
+void *
 alloc(
         int nbytes)
 {

@@ -19,6 +19,7 @@ struct oper pseudo[] = {
 {"pag",  PSEUDO, PAGE,   0},
 {"page", PSEUDO, PAGE,   0},
 {"rmb",  PSEUDO, RMB,    0},
+{"set",  PSEUDO, SET,    0},
 {"spc",  PSEUDO, NULL_OP,0},
 {"ttl",  PSEUDO, NULL_OP,0},
 {"zmb",  PSEUDO, ZMB,    0}

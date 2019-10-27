@@ -1,4 +1,15 @@
-#include "decl.h"
+#include "as.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
+#include "asdef.h"
+#include "util.h"
+#include "output.h"
+#include "ffwd.h"
+#include "do9.h"
+#include "symtab.h"
+#include "pseudo.h"
 /*
  *      as ---  cross assembler main program
  *      This requries a very peculiar set of arguments:
@@ -258,8 +269,6 @@ int parse_line()
 void process()
 {
     register struct oper *i;
-    struct oper *mne_look();
-    char    *skip_white();
 
     Old_pc = Pc;            /* setup `old' program counter */
     Optr = Operand;         /* point to beginning of operand field */
@@ -284,7 +293,7 @@ void process()
             /* Yes I'm ashamed f this hack, (AH) */
             if ( ']' == *Optr ) Optr += 1;
             Optr = skip_white(Optr);
-            if ( EOS!=*Optr && ';'!=*Optr ){
+            if ( EOS!=*Optr && ';'!=*Optr && '*'!=*Optr){
                 printf("<<<%s>>>\n", Optr);
                 warn("Comment doesnot start with comment symbol");
             }

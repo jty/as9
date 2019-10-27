@@ -1,4 +1,4 @@
-#include "decl.h"
+#include "output.h"
 /*
  *  stable --- prints the symbol table in alphabetical order
  */

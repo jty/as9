@@ -1,3 +1,5 @@
+#ifndef UTIL_H
+# define UTIL_H
 void fatal(char    *str);
 void error(char    *str);
 void errors(char *msg, char *str);
@@ -18,5 +20,6 @@ int head( char *str1, char *str2);
 int alpha(char c);
 int alphan(char c);
 int white(char c);
-char *alloc(int nbytes);
+void *alloc(int nbytes);
 
+#endif

@@ -14,6 +14,7 @@
 #define OPT     8       /* assembler option             */
 #define NULL_OP 9       /* null pseudo op               */
 #define PAGE    10      /* new page                     */
+#define SET     11      /* Set: reassignable EQU        */
 
 extern struct oper pseudo[];
 

@@ -1,4 +1,7 @@
-#include "decl.h"
+#include "do9.h"
+#include "asdef.h"
+#include "eval.h"
+#include "util.h"
 /*
  *      MC6809 specific processing
  */

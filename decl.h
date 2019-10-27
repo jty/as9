@@ -1,4 +1,5 @@
-#include <stdlib.h>
+#ifndef DECL_H
+# define DECL_H
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
@@ -12,3 +13,4 @@
 #include "symtab.h"
 #include "util.h"
 #include "pseudo.h"
+#endif

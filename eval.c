@@ -1,4 +1,7 @@
-#include "decl.h"
+#include "eval.h"
+#include "asdef.h"
+#include "util.h"
+#include "ffwd.h"
 /*
  *      eval --- evaluate expression
  *
@@ -136,7 +139,7 @@ int get_term()
         while(*Optr >= '0' && *Optr <= '9')
             val = (val * 10) + ( (*Optr++)-'0');
     }
-    else if(*Optr=='*'){    /* current location counter */
+    else if(*Optr=='*' || *Optr=='.'){    /* current location counter */
         Optr++;
         val = Old_pc;
     }

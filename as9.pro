@@ -23,7 +23,5 @@ HEADERS += \
     ffwd.h \
     output.h \
     pseudo.h \
-    pseudo9.h \
     symtab.h \
-    table9.h \
     util.h

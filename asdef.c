@@ -1,4 +1,4 @@
-#include "decl.h"
+#include "asdef.h"
 
 /* global variables */
 int     Line_num =0;            /* current line number          */
