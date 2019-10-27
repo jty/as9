@@ -26,7 +26,7 @@ int main(
     int     j = 0;
 
     if(argc < 2){
-        printf("Usage: %s [files]\n",argv[j]);
+        fprintf(stderr,"Usage: %s [files]\n",argv[j]);
         exit(1);
     }
     Argv = argv;
@@ -74,7 +74,7 @@ int main(
     Line_num = 0; /* reset line number */
     while( ++Cfn <= N_files )
         if((Fd = fopen(*++np,"r")) == NULL)
-            printf("as: can't open %s\n",*np);
+            fprintf(stderr,"as: can't open %s\n",*np);
         else{
             make_pass();
             fclose(Fd);
@@ -113,7 +113,7 @@ void initialize()
     int     i = 0;
 
 #ifdef DEBUG
-    printf("Initializing\n");
+    fprintf(stderr,"Initializing\n");
 #endif
     Err_count = 0;
     Pc        = 0;
@@ -153,7 +153,7 @@ void initialize()
 void re_init()
 {
 #ifdef DEBUG
-    printf("Reinitializing\n");
+    fprintf(stderr,"Reinitializing\n");
 #endif
     Pc      = 0;
     E_total = 0;
@@ -200,7 +200,7 @@ void make_pass()
 {
     char *pc;
 #ifdef DEBUG
-    printf("Pass %d\n",Pass);
+    fprintf(stderr,"Pass %d\n",Pass);
 #endif
     while( fgets(Line,MAXBUF,Fd) ){
         pc = Line+strlen(Line);  /* Past character. */
@@ -249,16 +249,17 @@ int parse_line()
 
     /***************************/
     pcto = Operand;  /* Can contain comment */
-    while( *pcfrm != NEWLINE && *pcfrm != EOS )
+    while( *pcfrm != NEWLINE && *pcfrm != EOS && pcfrm < Line+MAXBUF )
     {
         *pcto++ = *pcfrm++;
     }
-    *pcto = EOS;
-
+    while (pcto < Operand+MAXBUF) { // There is a one-off offset bug somewhere causing invalid comment warnings thus zero rest of buffer
+        *pcto++ = EOS;
+    }
 #ifdef DEBUG
-    printf("Label-%s-\n",Label);
-    printf("Op----%s-\n",Op);
-    printf("Operand-%s-\n",Operand);
+    fprintf(stderr,"Label-%s-\n",Label);
+    fprintf(stderr,"Op----%s-\n",Op);
+    fprintf(stderr,"Operand-%s-\n",Operand);
 #endif
     return(1);
 }
@@ -294,7 +295,7 @@ void process()
             if ( ']' == *Optr ) Optr += 1;
             Optr = skip_white(Optr);
             if ( EOS!=*Optr && ';'!=*Optr && '*'!=*Optr){
-                printf("<<<%s>>>\n", Optr);
+                fprintf(stderr,"<<<%s>>>\n", Optr);
                 warn("Comment doesnot start with comment symbol");
             }
         }

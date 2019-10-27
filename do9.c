@@ -535,6 +535,7 @@ void abd_index(
     k=regnum();
     pbyte += rtype(k);
     emit(pbyte);
+    Optr += 1; /* Original code missed this Optr bump past operand causing comment warnings */
     return;
 }
 

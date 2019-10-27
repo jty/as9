@@ -195,7 +195,7 @@ int install_or_update(
         if (is_update) {
             np->def = val;
 #ifdef DEBUG
-            printf("Updating %s as %d\n", str, val);
+            fprintf(stderr,"Updating %s as %d\n", str, val);
 #endif
             return(YES);
         } else {
@@ -213,7 +213,7 @@ int install_or_update(
     }
     /* enter new symbol */
 #ifdef DEBUG
-    printf("Installing %s as %d\n",str,val);
+    fprintf(stderr,"Installing %s as %d\n",str,val);
 #endif
     np = (struct nlist *) alloc(sizeof(struct nlist));
     if( np == (struct nlist *)ERR ){

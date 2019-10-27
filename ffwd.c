@@ -41,7 +41,7 @@ void fwdreinit()
     read(Forward,&Ffn,sizeof(Ffn));
     read(Forward,&F_ref,sizeof(F_ref)); /* read first forward ref into mem */
 #ifdef DEBUG
-    printf("First fwd ref: %d,%d\n",Ffn,F_ref);
+    fprintf(stderr,"First fwd ref: %d,%d\n",Ffn,F_ref);
 #endif
 }
 
@@ -63,16 +63,16 @@ void fwdnext()
 
     stat = read(Forward,&Ffn,sizeof(Ffn));
 #ifdef DEBUG
-    printf("Ffn stat=%d ",stat);
+    fprintf(stderr,"Ffn stat=%d ",stat);
 #endif
     stat = read(Forward,&F_ref,sizeof(F_ref));
 #ifdef DEBUG
-    printf("F_ref stat=%d  ",stat);
+    fprintf(stderr,"F_ref stat=%d  ",stat);
 #endif
     if( stat < 2 ){
         F_ref=0;Ffn=0;
     }
 #ifdef DEBUG
-    printf("Next Fwd ref: %d,%d\n",Ffn,F_ref);
+    fprintf(stderr,"Next Fwd ref: %d,%d\n",Ffn,F_ref);
 #endif
 }

@@ -45,7 +45,7 @@ int eval()
     char    o;              /* operator character */
 
 #ifdef DEBUG
-    printf("Evaluating %s\n",Optr);
+    fprintf(stderr,"Evaluating %s\n",Optr);
 #endif
     Force_byte = NO;
     Force_word = NO;
@@ -76,8 +76,8 @@ int eval()
 
     Result= left;
 #ifdef DEBUG
-    printf("Result=%x\n",Result);
-    printf("Force_byte=%d  Force_word=%d\n",Force_byte,Force_word);
+    fprintf(stderr,"Result=%x\n",Result);
+    fprintf(stderr,"Force_byte=%d  Force_word=%d\n",Force_byte,Force_word);
 #endif
     return(YES);
 }
@@ -197,7 +197,7 @@ int get_term()
 
     if(minus)  val=-val;
 #ifdef DEBUG
-    printf("Term=%x\n",val);
+    fprintf(stderr,"Term=%x\n",val);
 
 #endif
     return val;
