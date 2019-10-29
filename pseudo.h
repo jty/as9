@@ -14,8 +14,8 @@
 #define OPT     8       /* assembler option             */
 #define NULL_OP 9       /* null pseudo op               */
 #define PAGE    10      /* new page                     */
-#define SET     11      /* Set: reassignable EQU        */
-
+#define SET     11      /* SET: reassignable EQU        */
+#define END     12      /* END: S9 record boot address  */
 extern struct oper pseudo[];
 
 void do_pseudo(int op); /* which op */

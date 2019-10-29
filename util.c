@@ -109,6 +109,9 @@ void emit(int byte)
 
 /*
  *      f_record --- flush record out to S19 and Bin files if neccesary
+ * If the content of FFFE-FFFF is recorded, store it as reset_address
+ * When storing S9 record, if end_address is set, use that, if not, use reset_address.
+ * Outputted E_pc is saved across calls: current Pc is stored as start of next f_record() address
  */
 void f_record()
 {
@@ -117,7 +120,7 @@ void f_record()
 
     if(Pass == 1)
         return;
-    if(E_total==0)
+    if(E_total==0 && Oflag <= 1)
     {
         E_pc = Pc;
         return;
@@ -127,18 +130,26 @@ void f_record()
     chksum += E_pc>>8;
     if (Oflag)
     {
-        fprintf(Objfil,"S1");   /* record header preamble */
+        fprintf(Objfil,"S%c", Oflag + '0');   /* record header preamble */
         hexout(E_total+3);      /* byte count +3 */
         hexout(E_pc>>8);        /* high byte of PC */
         hexout(lobyte(E_pc));   /* low byte of PC */
     }
-    for(i=0;i<E_total;i++)
+    for(i=0;i<E_total;i++,E_pc++)
     {
         chksum += lobyte(E_bytes[i]);
         if (Oflag)
             hexout(lobyte(E_bytes[i])); /* data byte */
         if (Bflag)
             binout(E_bytes[i]);         /* binary data */
+        switch(E_pc) {
+        case 0xFFFE: /* Boot vector lo byte */
+            reset_address = (reset_address & 0xFF00) | E_bytes[i];
+            break;
+        case 0xFFFF: /* Boot vector hi byte */
+            reset_address = (reset_address & 0xFF) | (E_bytes[i] << 8);
+            break;
+        }
     }
     chksum =~ chksum;               /* one's complement */
     if (Oflag)

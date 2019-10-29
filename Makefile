@@ -25,10 +25,10 @@ all: as9$(EXE) as9debug$(EXE)
 
 
 as9$(EXE) : $(SRCC) $(SRCH)
-	$(CC) $(CFLAGS)  $(SRCC) -o $@
+	$(CC) $(CFLAGS) -ansi $(SRCC) -o $@
 
 as9debug$(EXE) : $(SRCC) $(SRCH)
-	$(CC) $(CFLAGS) -DDEBUG -g $(SRCC) -o $@
+	$(CC) $(CFLAGS) -ansi -DDEBUG -g $(SRCC) -o $@
 
 clean:
 	rm -rf as9$(EXE) as9debug$(EXE) as9.dSYM as9debug.dSYM 

@@ -157,7 +157,7 @@ struct oper table[] = {
 
 struct oper pseudo[] = {
 {"bsz",  PSEUDO, ZMB,    0},
-{"end",  PSEUDO, NULL_OP,0},
+{"end",  PSEUDO, END,    0},
 {"equ",  PSEUDO, EQU,    0},
 {"fcb",  PSEUDO, FCB,    0},
 {"fcc",  PSEUDO, FCC,    0},

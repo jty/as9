@@ -30,7 +30,7 @@ int     E_pc =0;                /* Pc at beginning of collection*/
 
 int     Lflag = 0;              /* listing flag 0=nolist,   1=list   */
 int     Bflag = 0;              /* binary  flag 0=nobinary, 1=binary */
-int     Oflag = 0;              /* s19     flag 0=noS19,    1=S19    */
+int     Oflag = 0;              /* s19     flag 0=noS19,    nonzero=S-record id 1=S1 9=S9 */
 int     Cflag = 0;              /* cycles  flag 0=nocycles, 1=cycles */
 int     Sflag = 0;              /* symbol  flag 0=nosymbol, 1=symbol */
 int     Rflag = 0;              /* crf     flag 0=nocrf,    1=crf    */
@@ -59,3 +59,6 @@ char    Bin_name[MAXPATH] = "             ";
 char    Lst_name[MAXPATH] = "             ";
 char    Sym_name[MAXPATH] = "             ";
 char    Crf_name[MAXPATH] = "             ";
+
+int reset_address = 0; /* Default boot address for S9 */
+long end_pseudo_address = -1; /* END directive start address initially not seen */

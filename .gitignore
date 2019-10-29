@@ -9,3 +9,4 @@ as9.dSYM
 *.o
 *.obj
 *.pro.user*
+.DS_Store

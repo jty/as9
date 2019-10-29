@@ -102,6 +102,14 @@ void do_pseudo(
         else
             error("Undefined Operand during Pass One");
         break;
+    case END:
+        if (*Operand != '*' && *Operand != EOS) { // Boot address given
+            if (eval()) {
+                end_pseudo_address = Result;
+            }
+        }
+        P_force = 0;
+        break;
     case OPT:                       /* assembler option */
         P_force=0;
         if( head(Operand,"l") )

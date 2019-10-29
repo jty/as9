@@ -101,8 +101,15 @@ int main(
             cross (root);
         }
 
-        if ( Oflag )
-            fprintf(Objfil,"S9030000FC\n"); /* at least give a decent ending */
+        if ( Oflag ) {
+            Oflag = 9;
+            if (end_pseudo_address >= 0) { /* END start_address given */
+                E_pc = (int)end_pseudo_address;
+            } else { /* Use reset vector if set */
+                E_pc = (int)reset_address;
+            }
+            f_record();
+        }
     }
     exit(Err_count);
 }
@@ -226,7 +233,6 @@ int parse_line()
 {
     register char *pcfrm = Line;
     register char *pcto;
-    char    *skip_white();
 
     if( *pcfrm == '*' || *pcfrm == '\n' ||
             *pcfrm == ';' )

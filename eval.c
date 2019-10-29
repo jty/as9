@@ -18,6 +18,7 @@
  *
  *      term ::=  symbol |
  *                * |
+ *                . |
  *                constant ;
  *
  *      symbol ::=  string of alphanumerics with non-initial digit
@@ -96,6 +97,8 @@ int is_op(
 
 /*
  *      get_term --- evaluate a single item in an expression
+ *      Get_term can not distinguish between comment begin '*' and current pc,
+ *      thus can not return invalid condition on comment.
  */
 int get_term()
 {
@@ -103,7 +106,7 @@ int get_term()
     char    *tmp;
     int     val = 0;        /* local value being built */
     int     minus;          /* unary minus flag */
-    struct nlist *lookup(),*pointer;
+    struct nlist *lookup(char *name),*pointer;
     struct link *pnt,*bpnt;
 
     if( *Optr == '-' ){
