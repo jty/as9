@@ -259,7 +259,7 @@ int parse_line()
     {
         *pcto++ = *pcfrm++;
     }
-    while (pcto < Operand+MAXBUF) { // There is a one-off offset bug somewhere causing invalid comment warnings thus zero rest of buffer
+    while (pcto < Operand+MAXBUF) { /* There is a one-off offset bug somewhere causing invalid comment warnings thus zero rest of buffer */
         *pcto++ = EOS;
     }
 #ifdef DEBUG

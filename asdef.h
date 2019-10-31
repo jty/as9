@@ -143,6 +143,6 @@ extern char    Lst_name[MAXPATH];
 extern char    Sym_name[MAXPATH];
 extern char    Crf_name[MAXPATH];
 
-extern int reset_address; // Remembered FFFE reset vector
-extern long end_pseudo_address; // Start address set in END directive
+extern int reset_address; /* Remembered FFFE reset vector */
+extern long end_pseudo_address; /* Start address set in END directive */
 #endif

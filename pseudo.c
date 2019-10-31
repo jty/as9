@@ -103,7 +103,7 @@ void do_pseudo(
             error("Undefined Operand during Pass One");
         break;
     case END:
-        if (*Operand != '*' && *Operand != EOS) { // Boot address given
+        if (*Operand != '*' && *Operand != EOS) { /* Boot address given */
             if (eval()) {
                 end_pseudo_address = Result;
             }
