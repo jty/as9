@@ -2,6 +2,8 @@ TEMPLATE = app
 CONFIG += console
 CONFIG -= app_bundle
 CONFIG -= qt
+QMAKE_CFLAGS += -std=c89 -Wno-implicit-function-declaration
+QMAKE_CC=gcc
 
 SOURCES += \
     as.c \
